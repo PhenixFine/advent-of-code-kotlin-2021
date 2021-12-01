@@ -8,9 +8,9 @@ fun main() {
     println(part2(input))
 }
 
-fun part1(input: List<Int>) = input.zipWithNext { a, b -> b - a }.count { it > 0 }
+private fun part1(input: List<Int>) = input.zipWithNext { a, b -> b - a }.count { it > 0 }
 
-fun part2(input: List<Int>): Int {
+private fun part2(input: List<Int>): Int {
     val sumsOfThree = mutableListOf<Int>()
 
     for (i in 0..input.lastIndex - 2) {
