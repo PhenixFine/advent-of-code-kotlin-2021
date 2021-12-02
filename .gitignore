@@ -1,3 +1,4 @@
 .gradle
 .idea
 build
+Day[0-9][0-9].txt
