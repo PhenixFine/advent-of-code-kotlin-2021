@@ -1,0 +1,10 @@
+package utils
+
+/**
+ * put your cookie info from Advent of Code in values: GA, GID, and SESSION.
+ */
+
+const val COOKIE = "cookie"
+const val GA = ""
+const val GID = ""
+const val SESSION = ""

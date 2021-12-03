@@ -1,3 +1,5 @@
+import utils.readInput
+
 fun main() {
     val testInput = readInput("Day01_test").map { it.toInt() }
     check(part1(testInput) == 7)

@@ -1,3 +1,5 @@
+import utils.readInput
+
 private const val FORWARD = "forward"
 private const val DOWN = "down"
 private const val UP = "up"
