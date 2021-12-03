@@ -18,26 +18,26 @@ private fun part1(input: List<String>): Int {
     var epsilon = ""
 
     repeat(input.first().length) { i ->
-        val isZeroMost = zeroIsMostCommon(i, input)
-        gamma += zeroOrOne(isZeroMost)
-        epsilon += zeroOrOne(!isZeroMost)
+        val isZeroMost = isZeroMostCommon(i, input)
+        gamma += getZeroOrOne(isZeroMost)
+        epsilon += getZeroOrOne(!isZeroMost)
     }
     return gamma.toInt(2) * epsilon.toInt(2)
 }
 
 private fun part2(input: List<String>): Int {
-    val isZeroMost = zeroIsMostCommon(0, input)
+    val isZeroMost = isZeroMostCommon(0, input)
     val oxygen = LifeSupport(true, isZeroMost, input).getRating()
     val co2 = LifeSupport(false, isZeroMost, input).getRating()
 
     return oxygen * co2
 }
 
-private fun zeroIsMostCommon(index: Int, input: List<String>): Boolean {
+private fun isZeroMostCommon(index: Int, input: List<String>): Boolean {
     return (input.count { it[index] == ZERO }) > input.size / 2
 }
 
-private fun zeroOrOne(isZero: Boolean) = if (isZero) ZERO else ONE
+private fun getZeroOrOne(isZero: Boolean) = if (isZero) ZERO else ONE
 
 private class LifeSupport(
     private val isOxygen: Boolean,
@@ -50,8 +50,8 @@ private class LifeSupport(
 
         repeat(input.first().length) { i ->
             rating += if (input.size > 1) {
-                if (i > 0) isZeroMost = zeroIsMostCommon(i, input)
-                val filter = zeroOrOne(if (isOxygen) isZeroMost else !isZeroMost)
+                if (i > 0) isZeroMost = isZeroMostCommon(i, input)
+                val filter = getZeroOrOne(if (isOxygen) isZeroMost else !isZeroMost)
                 filterList(i, filter)
                 filter
             } else input.first()[i]
