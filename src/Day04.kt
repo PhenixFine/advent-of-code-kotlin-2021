@@ -1,5 +1,7 @@
 import utils.readInput
 
+private const val GAME_ERROR = "Something went wrong with %s"
+
 fun main() {
     val testInput = readInput("Day04_test")
     check(part1(testInput) == 4512)
@@ -21,7 +23,7 @@ private fun part1(input: List<String>): Int {
             }
         }
     }
-    return input.size
+    throw Exception(String.format(GAME_ERROR, "part1"))
 }
 
 private fun part2(input: List<String>): Int {
@@ -38,7 +40,7 @@ private fun part2(input: List<String>): Int {
             }
         }
     }
-    return input.size
+    throw Exception(String.format(GAME_ERROR, "part2"))
 }
 
 private fun winningNumbers(input: List<String>) = input.first().split(",").map { it.toInt() }
