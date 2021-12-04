@@ -27,8 +27,8 @@ private fun part1(input: List<String>): Int {
 
 private fun part2(input: List<String>): Int {
     val isZeroMost = isZeroMostCommon(0, input)
-    val oxygen = LifeSupport(true, isZeroMost, input).getRating()
-    val co2 = LifeSupport(false, isZeroMost, input).getRating()
+    val oxygen = getRating(LifeSupport(true, isZeroMost, input))
+    val co2 = getRating(LifeSupport(false, isZeroMost, input))
 
     return oxygen * co2
 }
@@ -39,27 +39,24 @@ private fun isZeroMostCommon(index: Int, input: List<String>): Boolean {
 
 private fun getZeroOrOne(isZero: Boolean) = if (isZero) ZERO else ONE
 
-private class LifeSupport(
-    private val isOxygen: Boolean,
-    private var isZeroMost: Boolean,
-    private var input: List<String>
-) {
+private fun getRating(lifeSupport: LifeSupport): Int {
+    var rating = ""
 
-    fun getRating(): Int {
-        var rating = ""
-
+    with(lifeSupport) {
         repeat(input.first().length) { i ->
             rating += if (input.size > 1) {
                 if (i > 0) isZeroMost = isZeroMostCommon(i, input)
                 val filter = getZeroOrOne(if (isOxygen) isZeroMost else !isZeroMost)
-                filterList(i, filter)
+                input = filterList(i, input, filter)
                 filter
             } else input.first()[i]
         }
-        return rating.toInt(2)
     }
-
-    private fun filterList(index: Int, filter: Char) {
-        input = input.filter { it[index] == filter }
-    }
+    return rating.toInt(2)
 }
+
+private fun filterList(index: Int, input: List<String>, filter: Char): List<String> {
+    return input.filter { it[index] == filter }
+}
+
+private data class LifeSupport(val isOxygen: Boolean, var isZeroMost: Boolean, var input: List<String>)
