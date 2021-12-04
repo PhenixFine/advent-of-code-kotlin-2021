@@ -47,7 +47,7 @@ private fun getRating(lifeSupport: LifeSupport): Int {
             rating += if (input.size > 1) {
                 if (i > 0) isZeroMost = isZeroMostCommon(i, input)
                 val filter = getZeroOrOne(if (isOxygen) isZeroMost else !isZeroMost)
-                input = filterList(i, input, filter)
+                input = input.filter { it[i] == filter }
                 filter
             } else input.first()[i]
         }
@@ -55,8 +55,4 @@ private fun getRating(lifeSupport: LifeSupport): Int {
     return rating.toInt(2)
 }
 
-private fun filterList(index: Int, input: List<String>, filter: Char): List<String> {
-    return input.filter { it[index] == filter }
-}
-
-private data class LifeSupport(val isOxygen: Boolean, var isZeroMost: Boolean, var input: List<String>)
+private class LifeSupport(val isOxygen: Boolean, var isZeroMost: Boolean, var input: List<String>)
