@@ -23,7 +23,7 @@ private fun part1(input: List<String>): Int {
             }
         }
     }
-    throw Exception(String.format(GAME_ERROR, "part1"))
+    error(String.format(GAME_ERROR, "part1"))
 }
 
 private fun part2(input: List<String>): Int {
@@ -40,7 +40,7 @@ private fun part2(input: List<String>): Int {
             }
         }
     }
-    throw Exception(String.format(GAME_ERROR, "part2"))
+    error(String.format(GAME_ERROR, "part2"))
 }
 
 private fun winningNumbers(input: List<String>) = input.first().split(",").map { it.toInt() }
