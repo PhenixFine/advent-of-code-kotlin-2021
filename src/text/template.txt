@@ -2,8 +2,8 @@ import utils.readInput
 
 fun main() {
     val testInput = readInput("Day%s_test")
-    check(part1(testInput) == 1)
-    // check(part2(testInput) == 1)
+    check(part1(testInput) == 1) { "Wrong Answer for test 1" }
+    // check(part2(testInput) == 1) { "Wrong Answer for test 2" }
 
     val input = readInput("Day%s")
     println(part1(input))
