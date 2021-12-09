@@ -57,10 +57,10 @@ private fun getDifficult(list: List<String>, one: String, four: String): Map<Int
     val sixLength = list.filter { it.length == 6 }.toMutableList()
     val map = mutableMapOf<Int, String>()
 
-    getString(fiveLength, four, 3).let { map[2] = it; fiveLength.remove(it) }
-    getString(fiveLength, one, 3).let { map[3] = it; fiveLength.remove(it) }
-    getString(sixLength, one, 5).let { map[6] = it; sixLength.remove(it) }
-    getString(sixLength, four, 3).let { map[0] = it; sixLength.remove(it) }
+    map[2] = getString(fiveLength, four, 3).also { fiveLength.remove(it) }
+    map[3] = getString(fiveLength, one, 3).also { fiveLength.remove(it) }
+    map[6] = getString(sixLength, one, 5).also { sixLength.remove(it) }
+    map[0] = getString(sixLength, four, 3).also { sixLength.remove(it) }
     map[5] = fiveLength.first()
     map[9] = sixLength.first()
     return map
