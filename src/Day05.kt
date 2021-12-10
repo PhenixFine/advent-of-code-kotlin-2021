@@ -1,5 +1,7 @@
-import LineDirection.*
 import LineType.*
+import utils.Coordinate
+import utils.Direction
+import utils.Direction.*
 import utils.readInput
 
 fun main() {
@@ -49,7 +51,7 @@ private class Diagram(val info: DiagramInfo, diagonal: Boolean) {
     }
 
     private fun addCoordinate(coordinate: Coordinate) {
-        diagram[coordinate.x][coordinate.y] += 1
+        diagram[coordinate.row][coordinate.column] += 1
     }
 }
 
@@ -58,7 +60,7 @@ private class DiagramInfo(val lines: List<Line>, val max: Int)
 private class Line private constructor(
     val start: Coordinate,
     val end: Coordinate,
-    val direction: LineDirection,
+    val direction: Direction,
     val type: LineType
 ) {
 
@@ -81,18 +83,6 @@ private class Line private constructor(
             }
         }
     }
-}
-
-private data class Coordinate(val x: Int, val y: Int) {
-
-    operator fun plus(coordinate: Coordinate) = Coordinate(x + coordinate.x, y + coordinate.y)
-}
-
-private enum class LineDirection(val coordinate: Coordinate) {
-    DOWN(Coordinate(1, 0)),
-    RIGHT(Coordinate(0, 1)),
-    DOWN_LEFT(Coordinate(1, -1)),
-    DOWN_RIGHT(Coordinate(1, 1))
 }
 
 private enum class LineType {
