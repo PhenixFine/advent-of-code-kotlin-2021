@@ -18,8 +18,7 @@ private class SyntaxScoring private constructor(val middleScore: Long, val error
 
     companion object {
         private val errorMap = mapOf(-1 to 3, -2 to 57, -3 to 1197, -4 to 25137)
-        private val syntaxToNum =
-            mapOf('(' to 1, ')' to -1, '[' to 2, ']' to -2, '{' to 3, '}' to -3, '<' to 4, '>' to -4)
+        private val syntaxToNum = "()[]{}<>".mapSyntaxToNum(listOf(1, -1, 2, -2, 3, -3, 4, -4))
 
         fun get(input: List<String>): SyntaxScoring {
             val values = input.map { parseInputLine(it) }
@@ -55,5 +54,8 @@ private class SyntaxScoring private constructor(val middleScore: Long, val error
             }
             return points
         }
+
+        private fun String.mapSyntaxToNum(numbers: List<Int>) =
+            mapIndexed { index, char -> char to numbers[index] }.toMap()
     }
 }
