@@ -29,7 +29,7 @@ private class SyntaxScoring private constructor(val middleScore: Long, val error
         }
 
         private fun parseInputLine(line: String): Pair<ArrayDeque<Int>, Int> {
-            val numbers = line.toCharArray().map { syntaxToNum[it] ?: 0 }
+            val numbers = line.map { syntaxToNum[it] ?: 0 }
             val deque = ArrayDeque<Int>()
 
             for (num in numbers) {
