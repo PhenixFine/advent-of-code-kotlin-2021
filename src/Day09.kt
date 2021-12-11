@@ -86,7 +86,7 @@ private class Cave private constructor(private val cave: List<List<Int>>) {
             val cave = mutableListOf<List<Int>>()
 
             for (line in input) {
-                cave.add(line.toCharArray().map { it.digitToInt() })
+                cave.add(line.map { it.digitToInt() })
             }
             return Cave(cave)
         }
