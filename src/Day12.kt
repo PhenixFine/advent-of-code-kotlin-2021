@@ -84,7 +84,6 @@ private class PassagePathing private constructor(val start: List<String>, val ca
             return PassagePathing(start, map)
         }
 
-        private fun String.removeSplitAnd(string: String) =
-            replace(SPLIT, "").replace(string, "")
+        private fun String.removeSplitAnd(string: String) = replace(SPLIT, "").replace(string, "")
     }
 }
