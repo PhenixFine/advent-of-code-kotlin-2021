@@ -32,7 +32,7 @@ private fun getDiagramInfo(input: List<String>): DiagramInfo {
 }
 
 private class Diagram(val info: DiagramInfo, diagonal: Boolean) {
-    private val diagram = Array(info.max) { Array(info.max) { 0 } }
+    private val diagram = MutableList(info.max) { MutableList(info.max) { 0 } }
     val result: Int
 
     init {
@@ -51,7 +51,7 @@ private class Diagram(val info: DiagramInfo, diagonal: Boolean) {
     }
 
     private fun addCoordinate(coordinate: Coordinate) {
-        diagram[coordinate.row][coordinate.column] += 1
+        diagram[coordinate.rowY][coordinate.columnX] += 1
     }
 }
 
@@ -67,18 +67,18 @@ private class Line private constructor(
     companion object {
 
         fun getLine(x1: Int, y1: Int, x2: Int, y2: Int): Line {
-            val coordinate1 = Coordinate(x1, y1)
-            val coordinate2 = Coordinate(x2, y2)
+            val coordinate1 = Coordinate(y1, x1)
+            val coordinate2 = Coordinate(y2, x2)
 
             return when {
-                x1 == x2 && y1 < y2 -> Line(coordinate1, coordinate2, RIGHT, HORIZONTAL)
-                x1 == x2 && y1 > y2 -> Line(coordinate2, coordinate1, RIGHT, HORIZONTAL)
-                y1 == y2 && x1 < x2 -> Line(coordinate1, coordinate2, DOWN, VERTICAL)
-                y1 == y2 && x1 > x2 -> Line(coordinate2, coordinate1, DOWN, VERTICAL)
+                x1 == x2 && y1 < y2 -> Line(coordinate1, coordinate2, DOWN, VERTICAL)
+                x1 == x2 && y1 > y2 -> Line(coordinate2, coordinate1, DOWN, VERTICAL)
+                y1 == y2 && x1 < x2 -> Line(coordinate1, coordinate2, RIGHT, HORIZONTAL)
+                y1 == y2 && x1 > x2 -> Line(coordinate2, coordinate1, RIGHT, HORIZONTAL)
                 x1 < x2 && y1 < y2 -> Line(coordinate1, coordinate2, DOWN_RIGHT, DIAGONAL)
                 x1 > x2 && y1 > y2 -> Line(coordinate2, coordinate1, DOWN_RIGHT, DIAGONAL)
-                x1 < x2 && y1 > y2 -> Line(coordinate1, coordinate2, DOWN_LEFT, DIAGONAL)
-                x1 > x2 && y1 < y2 -> Line(coordinate2, coordinate1, DOWN_LEFT, DIAGONAL)
+                x1 > x2 && y1 < y2 -> Line(coordinate1, coordinate2, DOWN_LEFT, DIAGONAL)
+                x1 < x2 && y1 > y2 -> Line(coordinate2, coordinate1, DOWN_LEFT, DIAGONAL)
                 else -> error("Something went wrong with getLine: x1: $x1, y1: $y1, x2: $x2, y2: $y2")
             }
         }
