@@ -1,8 +1,6 @@
 import LineType.*
-import utils.Coordinate
-import utils.Direction
+import utils.*
 import utils.Direction.*
-import utils.readInput
 
 fun main() {
     val testInput = getDiagramInfo(readInput("Day05_test"))
@@ -43,15 +41,11 @@ private class Diagram(val info: DiagramInfo, diagonal: Boolean) {
     private fun addLine(line: Line) {
         var start = line.start
 
-        addCoordinate(start)
+        diagram[start]++
         do {
             start += line.direction.coordinate
-            addCoordinate(start)
+            diagram[start]++
         } while (start != line.end)
-    }
-
-    private fun addCoordinate(coordinate: Coordinate) {
-        diagram[coordinate.rowY][coordinate.columnX] += 1
     }
 }
 
