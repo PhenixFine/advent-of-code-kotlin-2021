@@ -1,5 +1,6 @@
 import utils.Coordinate
 import utils.Direction
+import utils.getOrNull
 import utils.readInput
 
 fun main() {
@@ -69,16 +70,15 @@ private class Octopuses private constructor(private val cavern: List<List<Octopu
 
         for (direction in Direction.values()) {
             val moved = coordinate + direction.coordinate
-            cavern.getOrNull(moved.row)?.getOrNull(moved.column)?.let { if (!it.flashed) list.add(Pair(moved, it)) }
+            cavern.getOrNull(moved)?.let { if (!it.flashed) list.add(Pair(moved, it)) }
         }
         return list
     }
 
     companion object {
 
-        fun get(input: List<String>): Octopuses {
-            return Octopuses(input.map { line -> line.map { char -> OctopusInfo(char.digitToInt()) } })
-        }
+        fun get(input: List<String>) =
+            Octopuses(input.map { line -> line.map { char -> OctopusInfo(char.digitToInt()) } })
     }
 }
 
