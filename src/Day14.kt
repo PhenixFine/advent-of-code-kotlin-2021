@@ -20,7 +20,7 @@ private class Polymerization(val template: String, val insertion: Map<String, Ch
 
     fun stepGrowth(steps: Int): Long {
         val charCount = charMap()
-        var oldPairCount = lettersMap()
+        var oldPairCount = pairsMap()
 
         repeat(steps) {
             val newPairCount = pairs.associateWith { Count(0L) }
@@ -45,7 +45,7 @@ private class Polymerization(val template: String, val insertion: Map<String, Ch
         return map
     }
 
-    private fun lettersMap(): Map<String, Count> {
+    private fun pairsMap(): Map<String, Count> {
         val zip = template.zipWithNext { a, b -> "$a$b" }
         val map = pairs.associateWith { Count(0L) }
 
