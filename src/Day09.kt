@@ -1,5 +1,6 @@
 import utils.Coordinate
 import utils.Direction.*
+import utils.getOrNull
 import utils.readInput
 
 fun main() {
@@ -44,7 +45,7 @@ private class Cave private constructor(private val cave: List<List<Int>>) {
         return true
     }
 
-    private fun getValue(coordinate: Coordinate) = cave.getOrNull(coordinate.row)?.getOrNull(coordinate.column) ?: skip
+    private fun getValue(coordinate: Coordinate) = cave.getOrNull(coordinate) ?: skip
 
     fun lowestSum() = lowestPoints.sumOf { it.second + 1 }
 
@@ -82,13 +83,6 @@ private class Cave private constructor(private val cave: List<List<Int>>) {
         private const val skip = 9
         private val directions = listOf(UP, DOWN, LEFT, RIGHT)
 
-        fun getCave(input: List<String>): Cave {
-            val cave = mutableListOf<List<Int>>()
-
-            for (line in input) {
-                cave.add(line.map { it.digitToInt() })
-            }
-            return Cave(cave)
-        }
+        fun getCave(input: List<String>) = Cave(input.map { line -> line.map { it.digitToInt() } })
     }
 }
