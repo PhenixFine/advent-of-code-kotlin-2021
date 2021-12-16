@@ -26,7 +26,7 @@ private class Polymerization(val template: String, val insertion: Map<String, Ch
             val newPairCount = pairs.associateWith { Count(0L) }
 
             oldPairCount.forEach { (pair, num) ->
-                if (num.count > 0) {
+                if (num.count > 0L) {
                     val add = insertion[pair] ?: error("key: $pair, not found.")
                     newPairCount[pair.first().toString() + add]?.let { it.count += num.count }
                     newPairCount[add.toString() + pair.last()]?.let { it.count += num.count }
@@ -39,7 +39,7 @@ private class Polymerization(val template: String, val insertion: Map<String, Ch
     }
 
     private fun charMap(): Map<Char, Count> {
-        val map = letters.associateWith { Count(0L) }.toMutableMap()
+        val map = letters.associateWith { Count(0L) }
 
         template.forEach { map[it]?.let { num -> num.count++ } }
         return map
@@ -62,4 +62,4 @@ private class Polymerization(val template: String, val insertion: Map<String, Ch
     }
 }
 
-private data class Count(var count: Long)
+private class Count(var count: Long)
