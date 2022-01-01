@@ -92,7 +92,7 @@ private class Scanners(data: List<List<Point3d>>) {
                 beaconMatches.forEach { it.second.rotate() }
             }
         }
-        error("Something went wrong with getShift")
+        error("Something went wrong with scannerShift")
     }
 
 
