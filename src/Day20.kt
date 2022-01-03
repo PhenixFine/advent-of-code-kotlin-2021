@@ -54,12 +54,11 @@ private class ImageEnhancement(val algorithm: List<Int>, val image: List<List<In
     }
 
     private fun enhance() {
-        val enhanced = MutableList(currentImage.size) { MutableList(currentImage.first().size) { 0 } }
-
-        currentImage.forEachIndexed { i, list ->
-            list.forEachIndexed { j, num -> enhanced[i][j] = getResult(num, Coordinate(i, j)) }
+        currentImage = List(currentImage.size) { i ->
+            List(currentImage.first().size) { j ->
+                getResult(currentImage[i][j], Coordinate(i, j))
+            }
         }
-        currentImage = enhanced
     }
 
     private fun getResult(num: Int, coordinate: Coordinate): Int {
