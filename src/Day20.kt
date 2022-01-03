@@ -55,9 +55,7 @@ private class ImageEnhancement(val algorithm: List<Int>, val image: List<List<In
 
     private fun enhance() {
         currentImage = List(currentImage.size) { i ->
-            List(currentImage.first().size) { j ->
-                getResult(currentImage[i][j], Coordinate(i, j))
-            }
+            List(currentImage.first().size) { j -> getResult(currentImage[i][j], Coordinate(i, j)) }
         }
     }
 
